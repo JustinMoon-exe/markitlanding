@@ -7,7 +7,7 @@ interface BentoGridProps {
 
 const BentoGrid: React.FC<BentoGridProps> = ({ children, className = '' }) => {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ${className}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ${className}`}>
       {children}
     </div>
   );
@@ -27,19 +27,19 @@ const BentoItem: React.FC<BentoItemProps> = ({
   rowSpan = 1 
 }) => {
   const colSpanClass = {
-    1: 'sm:col-span-1',
-    2: 'sm:col-span-2',
-    3: 'sm:col-span-3'
+    1: 'md:col-span-1',
+    2: 'md:col-span-2',
+    3: 'md:col-span-3'
   }[colSpan];
 
   const rowSpanClass = {
-    1: 'sm:row-span-1',
-    2: 'sm:row-span-2',
-    3: 'sm:row-span-3'
+    1: 'md:row-span-1',
+    2: 'md:row-span-2',
+    3: 'md:row-span-3'
   }[rowSpan];
 
   return (
-    <div className={`${colSpanClass} ${rowSpanClass} ${className}`}>
+    <div className={`col-span-1 row-span-1 ${colSpanClass} ${rowSpanClass} ${className}`}>
       {children}
     </div>
   );

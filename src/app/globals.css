@@ -19,5 +19,37 @@ body {
 }
 
 .glass-card {
-  @apply bg-glass-bg backdrop-blur-md border border-glass-border rounded-glass shadow-xl;
+  @apply bg-glass-bg backdrop-blur-[8px]  border border-glass-border rounded-glass shadow-xl;
+}
+
+@keyframes moveHorizontal {
+  0% { transform: translateX(-100%); filter: opacity(0%); }
+  10% { filter: opacity(100%); }
+  90% { filter: opacity(100%); }
+  100% { transform: translateX(100%); filter: opacity(0%); }
+}
+
+@keyframes moveVertical {
+  0% { transform: translateY(-100%); filter: opacity(0%); }
+  10% { filter: opacity(100%); }
+  90% { filter: opacity(100%); }
+  100% { transform: translateY(100%); filter: opacity(0%); }
+}
+
+@keyframes ping {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.animate-moveHorizontal {
+  animation: moveHorizontal 10s ease-in-out infinite;
+}
+
+.animate-moveVertical {
+  animation: moveVertical 10s ease-in-out infinite;
+}
+
+.animate-ping {
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }

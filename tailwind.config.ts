@@ -1,3 +1,4 @@
+// tailwind.config.ts
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -13,11 +14,10 @@ const config: Config = {
         'off-white': '#EAEAEA',
         'markit-orange': '#FF7400',
         'markit-maroon': '#784787',
-        'glass-bg': 'rgba(255, 255, 255, 0.03)',
+        'glass-bg': 'rgba(255, 255, 255, 0.001)',
         'glass-border': 'rgba(255, 255, 255, 0.1)',
-        // More visible line colors for initial topo animation debugging
-        'anim-line-1': 'rgba(255, 116, 0, 0.25)', // Brighter Orange
-        'anim-line-2': 'rgba(120, 71, 135, 0.20)', // Brighter Maroon
+        'anim-line-1': 'rgba(255, 116, 0, 0.25)',
+        'anim-line-2': 'rgba(120, 71, 135, 0.20)',
       },
       fontFamily: {
         krona: ['var(--font-krona-one)', 'sans-serif'],
@@ -28,14 +28,13 @@ const config: Config = {
       },
       backgroundImage: {
         noise: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\")",
-        // Simpler, more reliable repeating linear gradients for flowing lines
         'simple-flow-1': `repeating-linear-gradient(
           35deg,
           transparent,
           transparent 20px,
           theme('colors.anim-line-1') 20px,
-          theme('colors.anim-line-1') 23px 
-        )`, // Thinner lines, adjust as needed
+          theme('colors.anim-line-1') 23px
+        )`,
         'simple-flow-2': `repeating-linear-gradient(
           -55deg,
           transparent,
@@ -45,46 +44,60 @@ const config: Config = {
         )`,
       },
       letterSpacing: { 'wide-krona': '0.1em' },
-      boxShadow: { /* ... (keep existing) ... */ },
-      transitionTimingFunction: { /* ... (keep existing) ... */ },
+      boxShadow: {
+        // ... your existing boxShadow values ...
+      },
+      transitionTimingFunction: {
+        // ... your existing transitionTimingFunction values ...
+      },
       animation: {
         pulseSignal: 'pulseSignal 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        // Renamed and simplified animations for CTASupport
         flowingLinesA: 'flowingLinesA 20s linear infinite',
         flowingLinesB: 'flowingLinesB 25s linear infinite reverse',
         flowingLinesC: 'flowingLinesC 15s linear infinite',
         flowingLinesD: 'flowingLinesD 18s linear infinite reverse',
         flowingLinesE: 'flowingLinesE 12s linear infinite',
+        moveHorizontal: 'moveHorizontal 10s ease-in-out infinite',
+        moveVertical: 'moveVertical 10s ease-in-out infinite',
+        // Removed old radarPing, added softRadarPing
+        softRadarPing: 'softRadarPing 1.5s ease-out infinite', // Shorter, softer
       },
       keyframes: {
-        pulseSignal: {
-          '0%, 100%': { opacity: '0.4', width: '30%' },
-          '50%': { opacity: '0.8', width: '70%' },
+        pulseSignal: { /* ... */ },
+        bgScroll: { /* ... */ },
+        flowingLinesA: { /* ... */ },
+        flowingLinesB: { /* ... */ },
+        flowingLinesC: { /* ... */ },
+        flowingLinesD: { /* ... */ },
+        flowingLinesE: { /* ... */ },
+        moveHorizontal: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0.1' }, // Start slightly visible
+          '10%': { opacity: '0.6' }, // More opaque for main travel
+          '30%': { opacity: '0.1' },
+          '100%': { transform: 'translateX(100%)', opacity: '0.1' }, // End slightly visible
         },
-        // Single, reliable keyframe for background position scrolling
-        bgScroll: {
-          '0%': { backgroundPosition: '0 0' },
-          '100%': { backgroundPosition: '400px 400px' }, // Adjust distance for speed and tiling effect
+        moveVertical: {
+          '0%': { transform: 'translateY(-100%)', opacity: '0.1' },
+          '10%': { opacity: '0.6' },
+          '30%': { opacity: '0.1' },
+          '100%': { transform: 'translateY(100%)', opacity: '0.1' },
         },
-        flowingLinesA: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '100%': { transform: 'translate(100px, 100px) rotate(360deg)' },
-        },
-        flowingLinesB: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '100%': { transform: 'translate(-100px, -100px) rotate(-360deg)' },
-        },
-        flowingLinesC: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '100%': { transform: 'translate(50px, -50px) rotate(180deg)' },
-        },
-        flowingLinesD: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '100%': { transform: 'translate(-50px, 50px) rotate(-180deg)' },
-        },
-        flowingLinesE: {
-          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
-          '100%': { transform: 'translate(25px, 25px) rotate(90deg)' },
+        // Removed old radarPing keyframes
+        softRadarPing: { // New keyframes for the softer ping
+          '0%': {
+            transform: 'translate(-50%, -50%) scale(0.05)', // Start very small
+            opacity: '0.8', // Start fairly opaque
+            borderWidth: '1.5px',
+          },
+          '60%': { // Expands and starts fading border/opacity
+            opacity: '0.3',
+            borderWidth: '0.5px',
+          },
+          '100%': {
+            transform: 'translate(-50%, -50%) scale(6)', // Max size, adjust as needed
+            opacity: '0',
+            borderWidth: '0.25px',
+          },
         },
       },
     },

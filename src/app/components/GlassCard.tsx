@@ -4,7 +4,7 @@ const GlassCard = ({ children, className = '' }: { children: React.ReactNode, cl
   return (
     <div
       className={`
-        bg-white bg-opacity-5 backdrop-filter backdrop-blur-md
+        bg-white bg-opacity-10 backdrop-filter backdrop-blur-md
         border border-white border-opacity-15 rounded-3xl
         ${className}
       `}

@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import Image from 'next/image';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -32,7 +29,8 @@ const Footer = () => {
             © {currentYear} MarkIt. All rights reserved.
           </p>
           <div className="flex justify-center items-center space-x-2 sm:space-x-3 text-xs text-off-white/50">
-            <a href="#" className="hover:text-markit-orange transition-colors duration-200">Contact</a>
+            {/* MODIFIED LINE BELOW */}
+            <a href="mailto:justin@markittrade.com" className="hover:text-markit-orange transition-colors duration-200">Contact</a>
             <span className="opacity-50">|</span>
             <a href="#" className="hover:text-markit-orange transition-colors duration-200">Privacy</a>
           </div>
