@@ -1,23 +1,61 @@
+/*
+Completely Revised: Bento Box Layout Inspired by NextJS Portfolio Example
+- Restored global background gradient (no background overrides here)
+- Parent grid container uses fixed height of 600px to ensure uniform card sizes
+- 3×3 grid: explicit grid-rows and cols for equal units
+- CompanyDetails spans 2 columns & 2 rows; CTAForm spans 1 col & 2 rows; other sections each 1×1
+- All cards fill their grid cell with `h-full w-full`
+- Grid centered in the view, occupying roughly half the screen
+- Responsive fallback: single column stacking on small viewports
+*/
+
 "use client";
 
+import { useState, useEffect } from 'react';
 import HeroSection from '@/components/HeroSection';
 import CTAForm from '@/components/CTAForm';
 import CompanyDetails from '@/components/CompanyDetails';
 import WhyNowSection from '@/components/WhyNowSection';
 import ForWhomSection from '@/components/ForWhomSection';
-import PrinciplesSection from './PrinciplesSection';
+import PrinciplesSection from '@/components/PrinciplesSection';
 import Footer from '@/components/Footer';
-import ScrollIndicator from '@/components/ScrollIndicator';
+import { BentoGrid, BentoItem } from '@/components/BentoGrid';
+import MobileHomePage from '@/components/MobileHomePage'; // Import the new mobile page
+import ScrollIndicator from '@/components/ScrollIndicator'; // Import the ScrollIndicator component
+// import { Catamaran } from 'next/font/google'; // Not used in this component
+// import Logo from './components/Logo'; // Not used in this component
+// import { randInt } from 'three/src/math/MathUtils.js'; // Not used in this component
 
-export default function MobileHomePage() {
+export default function HomePage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind's 'md' breakpoint is 768px
+    };
+
+    // Set initial state
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  if (isMobile) {
+    return <MobileHomePage />;
+  }
+
   // Define varying line weights/thicknesses
   const lineWeights = ['h-[1px]', 'h-[2px]', 'h-[1px]', 'h-[3px]', 'h-[1px]', 'h-[2px]'];
   const lineWeightsVertical = ['w-[1px]', 'w-[2px]', 'w-[1px]', 'w-[3px]', 'w-[1px]', 'w-[2px]'];
 
   // Define positions and spacing for main lines to calculate intersections for pings
-  const numMajorHorizontalLines = 2; // Reduced for mobile
-  const numMajorVerticalLines = 2;   // Reduced for mobile
-  const startOffsetPercent = 10; // Increased offset for fewer, more central lines
+  const numMajorHorizontalLines = 4;
+  const numMajorVerticalLines = 3;
+  const startOffsetPercent = 5; // Percentage offset from the edge
 
   // Calculate spacing based on offset and number of lines
   const horizontalLineSpacing = (100 - 2 * startOffsetPercent) / (numMajorHorizontalLines - 1);
@@ -29,7 +67,7 @@ export default function MobileHomePage() {
       <div className="fixed inset-0 z-[-1] bg-dark-bg pointer-events-none"
         style={{
           backgroundImage:
-            `url(\'data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'1.5\' numOctaves=\'1\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity='0.05'/%3E%3C/svg%3E\')`,
+            `url(\'data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'1.5\' numOctaves=\'1\' stitchTiles=\'stitch\'%2F%3E%3C%2Ffilter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.05\'%2F%3E%3C%2Fsvg%3E\')`,
           backgroundSize: 'auto',
           backgroundRepeat: 'repeat',
         }} />
@@ -91,50 +129,61 @@ export default function MobileHomePage() {
 
       {/* Fainter Data Stream Lines (Horizontal) */}
       <div className="fixed inset-0 pointer-events-none opacity-10 z-[0]">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`ds-h-${i}`}
             className="absolute w-full h-[0.5px] bg-markit-orange animate-moveHorizontal"
-            style={{ top: `${i * 20}%`, animationDelay: `-${i * 1.0}s`, animationDuration: '15s' }}
+            style={{ top: `${i * 5}%`, animationDelay: `-${i * 1.0}s`, animationDuration: '15s' }}
           />
         ))}
       </div>
 
       {/* Fainter Data Stream Lines (Vertical) */}
       <div className="fixed inset-0 pointer-events-none opacity-10 z-[0]">
-        {Array.from({ length: 5 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={`ds-v-${i}`}
             className="absolute h-full w-[0.5px] bg-markit-orange animate-moveVertical"
-            style={{ left: `${i * 20}%`, animationDelay: `-${i * 1.0}s`, animationDuration: '15s' }}
+            style={{ left: `${i * 5}%`, animationDelay: `-${i * 1.0}s`, animationDuration: '15s' }}
           />
         ))}
       </div>
 
-      {/* Hero section */}
+      {/* Full-screen hero */}
       <HeroSection />
 
-      {/* Content sections in a single column */}
-      <main className="flex-grow flex flex-col items-center justify-start p-4 mb-16 relative z-10 space-y-8">
-        <div className="w-full max-w-md p-2"> {/* Constrain width for readability */}
-          <CompanyDetails />
-        </div>
-        <div className="w-full max-w-md p-2">
-          <PrinciplesSection />
-        </div>
-        <div className="w-full max-w-md p-2">
-          <ForWhomSection />
-        </div>
-        <div className="w-full max-w-md p-2">
-          <WhyNowSection />
-        </div>
-        <div className="w-full max-w-md p-2">
-          <CTAForm />
-        </div>
-      </main>
+      {/* Bento Box Section */}
+      <main className="flex-grow flex items-center justify-center p-4 sm:p-4 md:p-8 mb-1 md:mb-8 relative z-10">
+        <div className="w-full max-w-7xl">
+          <BentoGrid className="auto-rows-auto sm:auto-rows-[208px]">
+            <BentoItem rowSpan={1} colSpan={2}>
+                <CompanyDetails  />
+            </BentoItem>
+            <BentoItem rowSpan={1} colSpan={1} className="hidden md:block">
+               <div className="min-h-[1px] min-w-[1px] bg-transparent"></div>
+            </BentoItem>
+            <BentoItem rowSpan={1} colSpan={1}>
+              <PrinciplesSection />
+            </BentoItem>
+            <BentoItem rowSpan={1} colSpan={1}>
+              <ForWhomSection />
+            </BentoItem>
+            <BentoItem rowSpan={2} colSpan={1}>
+              <WhyNowSection />
+            </BentoItem>
+            <BentoItem rowSpan={1} colSpan={1} className="hidden md:block">
+               <div className="min-h-[1px] min-w-[1px] bg-transparent"></div>
+            </BentoItem>
+            <BentoItem rowSpan={1} colSpan={1}>
+              <CTAForm />
+            </BentoItem>
+          </BentoGrid>
+           <div className='p-3.5'/>
+          </div>
+        </main>
 
       <Footer />
       <ScrollIndicator />
     </div>
   );
-} 
+}

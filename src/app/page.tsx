@@ -21,6 +21,7 @@ import PrinciplesSection from './components/PrinciplesSection';
 import Footer from '@/components/Footer';
 import { BentoGrid, BentoItem } from '@/components/BentoGrid';
 import MobileHomePage from '@/components/MobileHomePage'; // Import the new mobile page
+import ScrollIndicator from '@/components/ScrollIndicator'; // Import the ScrollIndicator component
 // import { Catamaran } from 'next/font/google'; // Not used in this component
 // import Logo from './components/Logo'; // Not used in this component
 // import { randInt } from 'three/src/math/MathUtils.js'; // Not used in this component
@@ -152,9 +153,9 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Bento Box Section */}
-      <main className="flex-grow flex items-center justify-center p-2 sm:p-4 md:p-8 mb-16 md:mb-32 relative z-10">
-        <div className="w-full max-w-5xl">
-          <BentoGrid className="auto-rows-auto sm:auto-rows-[160px]">
+      <main className="flex-grow flex items-center justify-center p-4 sm:p-4 md:p-8 mb-1 md:mb-8 relative z-10">
+        <div className="w-full max-w-7xl">
+          <BentoGrid className="auto-rows-auto sm:auto-rows-[208px]">
             <BentoItem rowSpan={1} colSpan={2}>
                 <CompanyDetails  />
             </BentoItem>
@@ -182,6 +183,7 @@ export default function HomePage() {
         </main>
 
       <Footer />
+      <ScrollIndicator />
     </div>
   );
 }

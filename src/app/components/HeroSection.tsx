@@ -1,4 +1,3 @@
-
 const HeroSection = () => {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
@@ -10,7 +9,7 @@ const HeroSection = () => {
             <span className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem]">M</span>
             <span className="text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[8rem]">ARK</span>
             <span className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem]">I</span>
-            <span className="text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[8rem]">T</span>
+            <span className="text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[8rem] ml-[-0.7rem]">T</span>
           </h1>
 
 

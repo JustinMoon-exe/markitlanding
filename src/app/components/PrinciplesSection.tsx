@@ -10,7 +10,7 @@ const PrinciplesSection = forwardRef<HTMLDivElement>((props, ref) => {
       <h2 className="font-krona text-base text-off-white uppercase tracking-wide mb-3">
         What We <span className="text-markit-orange">Believe</span>
       </h2>
-      <ul className="font-amiko text-xs text-off-white space-y-2 leading-relaxed">
+      <ul className="font-amiko text-sm text-off-white space-y-2 leading-relaxed">
         <li>→ Absolute accuracy trumps volume.</li>
         <li>→ Contextual intelligence over raw feeds.</li>
         <li>→ Speed converts insight into edge.</li>

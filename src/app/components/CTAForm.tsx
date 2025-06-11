@@ -72,13 +72,13 @@ const CTAForm = forwardRef<HTMLDivElement>((props, ref) => {
           disabled={isSubmitting}
           className="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-off-white placeholder-gray-400
                      focus:outline-none focus:border-markit-orange focus:ring-1 focus:ring-markit-orange
-                     transition-all duration-300 text-xs"
+                     transition-all duration-300 text-sm"
         />
         <button
           type="submit"
           disabled={isSubmitting}
           className="w-full bg-markit-orange text-dark-bg font-amiko font-bold py-2 px-4 rounded-lg
-                     hover:bg-opacity-80 hover:shadow-glow-orange text-xs
+                     hover:bg-opacity-80 hover:shadow-glow-orange text-sm
                      transition-all duration-300 transform hover:-translate-y-0.5
                      disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -86,7 +86,7 @@ const CTAForm = forwardRef<HTMLDivElement>((props, ref) => {
         </button>
       </form>
       {message && (
-        <p className={`mt-3 text-xs text-center ${message.startsWith('Error:') ? 'text-red-400' : 'text-green-400'}`}>
+        <p className={`mt-3 text-sm text-center ${message.startsWith('Error:') ? 'text-red-400' : 'text-green-400'}`}>
           {message}
         </p>
       )}

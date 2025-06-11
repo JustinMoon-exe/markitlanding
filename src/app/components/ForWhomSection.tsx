@@ -9,10 +9,10 @@ const ForWhomSection = forwardRef<HTMLDivElement>((props, ref) => (
     <h2 className="font-krona text-base text-off-white uppercase tracking-wide mb-3">
       Who We&apos;re <span className="text-markit-maroon">Serving</span>
     </h2>
-    <p className="font-amiko text-xs text-off-white leading-relaxed">
+    <p className="font-amiko text-sm text-off-white leading-relaxed">
       From importers racing to meet new duty rates, to global manufacturers optimizing cost forecasts:
     </p>
-    <p className="font-amiko text-xs text-markit-maroon/70 italic mt-3 leading-relaxed">
+    <p className="font-amiko font-bold text-xs text-markit-maroon italic mt-3 leading-relaxed">
       If you move goods, MarkIt makes compliance effortless.
     </p>
   </div>
