@@ -114,7 +114,7 @@ export default function MobileHomePage() {
       <HeroSection />
 
       {/* Content sections in a single column */}
-      <main className="flex-grow flex flex-col items-center justify-start p-4 mb-16 relative z-10 space-y-80">
+      <main className="flex-grow flex flex-col items-center justify-start p-4 mb-16 relative z-10 space-y-4">
         <div className="w-full max-w-md p-2"> {/* Constrain width for readability */}
           <CompanyDetails />
         </div>
