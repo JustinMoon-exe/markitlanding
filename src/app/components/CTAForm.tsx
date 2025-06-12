@@ -4,7 +4,7 @@ import { useState, forwardRef } from 'react';
 
 const CTAForm = forwardRef<HTMLDivElement>((props, ref) => {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(''); // To display success or error messages
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,41 +52,24 @@ const CTAForm = forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <div ref={ref} className="glass-card h-full w-full p-4 flex flex-col justify-center">
-      <h3 className="font-krona text-base text-off-white text-center mb-3 uppercase tracking-wider">
-        Stay <span className="text-markit-orange">Informed</span>
-      </h3>
-      {/*
-        The 'action' and 'method' on the form tag are not strictly needed
-        when using e.preventDefault() and fetch, but it's good practice
-        for accessibility and as a fallback if JavaScript fails.
-        However, for Formspree, the fetch URL is the most important.
-      */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="email"
-          name="email" // 'name' attribute is still good for FormData and accessibility
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
+          className="w-full p-3 rounded-md bg-dark-bg/50 border border-glass-border text-lg text-off-white placeholder-gray-400 focus:outline-none focus:border-markit-orange"
           required
-          disabled={isSubmitting}
-          className="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-off-white placeholder-gray-400
-                     focus:outline-none focus:border-markit-orange focus:ring-1 focus:ring-markit-orange
-                     transition-all duration-300 text-sm"
         />
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-markit-orange text-dark-bg font-amiko font-bold py-2 px-4 rounded-lg
-                     hover:bg-opacity-80 hover:shadow-glow-orange text-sm
-                     transition-all duration-300 transform hover:-translate-y-0.5
-                     disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full p-3 bg-markit-orange text-dark-bg text-lg font-bold rounded-md hover:bg-opacity-90 transition-colors"
         >
-          {isSubmitting ? 'Submitting...' : <>Stay <span className="italic">Tuned</span></>}
+          Get Updates
         </button>
       </form>
       {message && (
-        <p className={`mt-3 text-sm text-center ${message.startsWith('Error:') ? 'text-red-400' : 'text-green-400'}`}>
+        <p className={`mt-3 text-base text-center ${message.startsWith('Error:') ? 'text-red-400' : 'text-green-400'}`}>
           {message}
         </p>
       )}

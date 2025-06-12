@@ -14,6 +14,8 @@ const config: Config = {
         'off-white': '#EAEAEA',
         'markit-orange': '#FF7400',
         'markit-maroon': '#784787',
+        'markit-maroon-light': '#9F7AEA',
+        'markit-purple': '#5A3D73',
         'glass-bg': 'rgba(255, 255, 255, 0.001)',
         'glass-border': 'rgba(255, 255, 255, 0.1)',
         'anim-line-1': 'rgba(255, 116, 0, 0.25)',
@@ -61,6 +63,8 @@ const config: Config = {
         moveVertical: 'moveVertical 10s ease-in-out infinite',
         // Removed old radarPing, added softRadarPing
         softRadarPing: 'softRadarPing 1.5s ease-out infinite', // Shorter, softer
+        contentFadeIn: 'contentFadeIn 0.4s ease-in-out forwards', // 'forwards' keeps the end state
+        contentFadeOut: 'contentFadeOut 0.3s ease-in-out forwards', // 'forwards' keeps the end state
       },
       keyframes: {
         pulseSignal: { /* ... */ },
@@ -70,6 +74,14 @@ const config: Config = {
         flowingLinesC: { /* ... */ },
         flowingLinesD: { /* ... */ },
         flowingLinesE: { /* ... */ },
+        contentFadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        contentFadeOut: {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(10px)' },
+        },
         moveHorizontal: {
           '0%': { transform: 'translateX(-100%)', opacity: '0.1' }, // Start slightly visible
           '10%': { opacity: '0.6' }, // More opaque for main travel
@@ -100,6 +112,7 @@ const config: Config = {
           },
         },
       },
+
     },
   },
   plugins: [],
