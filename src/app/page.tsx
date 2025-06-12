@@ -19,15 +19,66 @@ import WhyNowSection from '@/components/WhyNowSection';
 import ForWhomSection from '@/components/ForWhomSection';
 import PrinciplesSection from './components/PrinciplesSection';
 import Footer from '@/components/Footer';
-import { BentoGrid, BentoItem } from '@/components/BentoGrid';
+// import { BentoGrid, BentoItem } from '@/components/BentoGrid'; // Remove BentoGrid
 import MobileHomePage from '@/components/MobileHomePage'; // Import the new mobile page
 import ScrollIndicator from '@/components/ScrollIndicator'; // Import the ScrollIndicator component
+import Infocard from '@/components/Infocard'; // Import Infocard
 // import { Catamaran } from 'next/font/google'; // Not used in this component
 // import Logo from './components/Logo'; // Not used in this component
 // import { randInt } from 'three/src/math/MathUtils.js'; // Not used in this component
 
+interface CardData {
+  id: string;
+  title: string;
+  content: React.ReactNode;
+  colorClass: string;
+  textColorClass: string;
+}
+
 export default function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [selectedTitle, setSelectedTitle] = useState<string | null>(null);
+
+  const cardData: CardData[] = [
+    {
+      id: 'company-details',
+      title: "Product",
+      content: <CompanyDetails />,
+      colorClass: "bg-markit-purple",
+      textColorClass: "text-off-white",
+    },
+    {
+      id: 'principles-section',
+      title: "Principles",
+      content: <PrinciplesSection />,
+      colorClass: "bg-markit-orange",
+      textColorClass: "text-dark-bg",
+    },
+    {
+      id: 'for-whom-section',
+      title: "Who",
+      content: <ForWhomSection />,
+      colorClass: "bg-markit-maroon-light",
+      textColorClass: "text-off-white",
+    },
+    {
+      id: 'why-now-section',
+      title: "Why",
+      content: <WhyNowSection />,
+      colorClass: "bg-markit-purple",
+      textColorClass: "text-off-white",
+    },
+    {
+      id: 'cta-form',
+      title: "Contact",
+      content: <CTAForm />,
+      colorClass: "bg-markit-orange",
+      textColorClass: "text-dark-bg",
+    },
+  ];
+
+  const selectedCard = cardData.find(card => card.id === selectedCardId);
 
   useEffect(() => {
     const handleResize = () => {
@@ -152,35 +203,54 @@ export default function HomePage() {
       {/* Full-screen hero */}
       <HeroSection />
 
-      {/* Bento Box Section */}
-      <main className="flex-grow flex items-center justify-center p-4 sm:p-4 md:p-8 mb-1 md:mb-8 relative z-10">
-        <div className="w-full max-w-7xl">
-          <BentoGrid className="auto-rows-auto sm:auto-rows-[208px]">
-            <BentoItem rowSpan={1} colSpan={2}>
-                <CompanyDetails  />
-            </BentoItem>
-            <BentoItem rowSpan={1} colSpan={1} className="hidden md:block">
-               <div className="min-h-[1px] min-w-[1px] bg-transparent"></div>
-            </BentoItem>
-            <BentoItem rowSpan={1} colSpan={1}>
-              <PrinciplesSection />
-            </BentoItem>
-            <BentoItem rowSpan={1} colSpan={1}>
-              <ForWhomSection />
-            </BentoItem>
-            <BentoItem rowSpan={2} colSpan={1}>
-              <WhyNowSection />
-            </BentoItem>
-            <BentoItem rowSpan={1} colSpan={1} className="hidden md:block">
-               <div className="min-h-[1px] min-w-[1px] bg-transparent"></div>
-            </BentoItem>
-            <BentoItem rowSpan={1} colSpan={1}>
-              <CTAForm />
-            </BentoItem>
-          </BentoGrid>
-           <div className='p-3.5'/>
+      {/* Bento Box Section - New Implementation */}
+      <main className="flex-grow flex items-start justify-start p-4 sm:p-4 md:p-8 mb-1 md:mb-8 relative z-10">
+        <div className="w-full max-w-7xl h-[450px] flex flex-col md:ml-40 lg:ml-55">
+          {/* Title Cards Row */}
+          <div className="flex justify-start mb-5 space-x-4">
+            {cardData.map((card) => (
+              <div
+                key={card.id}
+                onClick={() => setSelectedCardId(selectedCardId === card.id ? null : card.id)}
+                className={`rounded-lg cursor-pointer transition-all duration-500 ease-in-out
+                           glass-card
+                           ${card.colorClass === 'bg-markit-purple' ? 'purple-glow' :
+                             card.colorClass === 'bg-markit-maroon-light' ? 'maroon-glow' : ''}
+                           ${selectedCardId === card.id ? 'bg-opacity-30 backdrop-blur-sm' : 'bg-opacity-20'}
+                           ${selectedCardId === card.id ? card.colorClass : ''}
+                           text-off-white
+                           flex items-end justify-start text-left font-amiko text-2xl font-medium p-4`}
+                style={{
+                  flexBasis: selectedCardId === card.id ? '60%' : '128px',
+                  height: '128px',
+                  backgroundColor: selectedCardId === card.id ?
+                    card.colorClass === 'bg-markit-orange' ? 'rgba(255, 116, 0, 0.15)' :
+                    card.colorClass === 'bg-markit-purple' ? 'rgba(90, 61, 115, 0.15)' :
+                    'rgba(159, 122, 234, 0.15)' : 'rgba(255, 255, 255, 0.05)'
+                }}
+              >
+                {card.title}
+              </div>
+            ))}
           </div>
-        </main>
+
+          {/* Infocard Area */}
+          <div className={`rounded-lg overflow-hidden transition-all duration-500 ease-in-out
+                          glass-card backdrop-blur-md
+                          ${selectedCardId ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
+                          p-0 shadow-xl max-w-8xl`}>
+            {selectedCard && (
+              <Infocard
+                content={selectedCard.content}
+                onClose={() => setSelectedCardId(null)}
+                colorClass="bg-transparent"
+                textColorClass="text-off-white"
+                currentCardId={selectedCardId}
+              />
+            )}
+          </div>
+        </div>
+      </main>
 
       <Footer />
       <ScrollIndicator />

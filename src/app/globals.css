@@ -19,13 +19,23 @@ body {
 }
 
 .glass-card {
-  @apply bg-glass-bg backdrop-blur-[8px]  border border-glass-border rounded-glass shadow-xl;
+  @apply bg-glass-bg backdrop-blur-[8px] border border-glass-border rounded-lg shadow-xl;
   transition: all 0.3s ease-in-out;
 }
 
 .glass-card:hover {
   box-shadow: 0 0 10px rgba(255, 116, 0, 0.4);
   border-color: rgba(255, 116, 0, 0.4);
+}
+
+.glass-card.purple-glow:hover {
+  box-shadow: 0 0 10px rgba(90, 61, 115, 0.4);
+  border-color: rgba(90, 61, 115, 0.4);
+}
+
+.glass-card.maroon-glow:hover {
+  box-shadow: 0 0 10px rgba(159, 122, 234, 0.4);
+  border-color: rgba(159, 122, 234, 0.4);
 }
 
 @keyframes moveHorizontal {

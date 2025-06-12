@@ -14,6 +14,8 @@ const config: Config = {
         'off-white': '#EAEAEA',
         'markit-orange': '#FF7400',
         'markit-maroon': '#784787',
+        'markit-maroon-light': '#9F7AEA',
+        'markit-purple': '#5A3D73',
         'glass-bg': 'rgba(255, 255, 255, 0.001)',
         'glass-border': 'rgba(255, 255, 255, 0.1)',
         'anim-line-1': 'rgba(255, 116, 0, 0.25)',
