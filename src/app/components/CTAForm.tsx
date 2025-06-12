@@ -4,7 +4,7 @@ import { useState, forwardRef } from 'react';
 
 const CTAForm = forwardRef<HTMLDivElement>((props, ref) => {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(''); // To display success or error messages
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

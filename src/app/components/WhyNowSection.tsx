@@ -1,5 +1,4 @@
 // src/components/WhyNowSection.tsx
-import { forwardRef } from 'react';
 
 const WhyNowSection = () => {
   return (

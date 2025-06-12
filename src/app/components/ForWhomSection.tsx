@@ -1,5 +1,4 @@
 // src/components/ForWhomSection.tsx
-import { forwardRef } from 'react';
 
 const ForWhomSection = () => {
   return (

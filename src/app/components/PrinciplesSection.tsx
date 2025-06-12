@@ -1,5 +1,4 @@
 // src/components/PrinciplesSection.tsx
-import { forwardRef } from 'react';
 
 const PrinciplesSection = () => {
   return (

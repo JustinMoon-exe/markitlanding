@@ -1,5 +1,4 @@
 // src/components/CompanyDetails.tsx
-import { forwardRef } from 'react';
 
 const CompanyDetails = () => {
   return (
