@@ -185,7 +185,7 @@ export default function HomePage() {
             backgroundAttachment: 'fixed',
            }} />
 
-      <div className="fixed inset-0 pointer-events-none opacity-70 z-[0]">
+      {/* <div className="fixed inset-0 pointer-events-none opacity-70 z-[0]">
         {Array.from({ length: numMajorHorizontalLines }).map((_, i) => (
           <div
             key={`h-${i}`}
@@ -193,8 +193,8 @@ export default function HomePage() {
             style={{ top: `${startOffsetPercent + i * horizontalLineSpacing}%`, animationDelay: `-${i * 2}s` }}
           />
         ))}
-      </div>
-      <div className="fixed inset-0 pointer-events-none opacity-70 z-[0]">
+      </div> */}
+      {/* <div className="fixed inset-0 pointer-events-none opacity-70 z-[0]">
         {Array.from({ length: numMajorVerticalLines }).map((_, i) => (
           <div
             key={`v-${i}`}
@@ -202,7 +202,7 @@ export default function HomePage() {
             style={{ left: `${startOffsetPercent + i * verticalLineSpacing}%`, animationDelay: `-${i * 2.75}s` }}
           />
         ))}
-      </div>
+      </div> */}
       <div className="fixed inset-0 pointer-events-none z-[0]">
         {Array.from({ length: numMajorHorizontalLines }).map((_, hIndex) => (
           Array.from({ length: numMajorVerticalLines }).map((_, vIndex) => {
