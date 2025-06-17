@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${kronaOne.variable} ${amiko.variable} antialiased`}>
-      <body className="fade-in">
+      <body>
         {children}
       </body>
     </html>
