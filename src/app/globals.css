@@ -1,3 +1,9 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
 :root {
   --bg-1: #050505;
   --bg-2: #0b0b0b;
@@ -35,7 +41,7 @@ button, input, textarea, select { font-family: inherit; }
 .header { display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:40px; }
 .brand { font-family: var(--font-krona), var(--font-amiko), sans-serif; font-weight:700; font-size:22px; color: var(--accent); }
 
-.brand-logo { width: 160px; height: auto; margin-bottom: -20px; }
+.brand-logo { width: 300px; height: auto; margin-bottom: 30px; margin-right: -60px;}
 .nav { display:flex; gap:12px; }
 .nav-btn { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
 .nav-btn:hover { color: #fff; border-color: rgba(255,255,255,0.12); }
@@ -44,7 +50,7 @@ button, input, textarea, select { font-family: inherit; }
 .centered-hero { align-items: center; justify-content: center; text-align: center; min-height: calc(100vh - 120px); }
 .hero-title { margin:0; font-size:84px; line-height:0.95; letter-spacing:-1px; color: #ffffff; font-family: var(--font-krona), serif; transform-origin:center; animation: heroIn 900ms cubic-bezier(.2,.9,.2,1) both; }
 .hero-sub { margin:0; color:var(--muted); font-size:18px }
-.tagline { margin: 8px 0 0 0; font-size:16px; color: #cfcfcf; letter-spacing: 0.6px; text-transform: none; opacity: 0.95; font-weight:500; animation: taglineIn 700ms ease both 220ms; }
+.tagline { margin: 8px 0 0 0; font-size:16px; color: #cfcfcf; letter-spacing: 0.6px; text-transform: none; opacity: 0.95; font-weight:500; margin-top: -65px; animation: taglineIn 700ms ease both 220ms; }
 
 /* Force Krona One on all common text elements to match the hero */
 h1,h2,h3,h4,h5,h6,p,a,li,span,button,input,textarea,select,label { font-family: var(--font-krona), var(--font-amiko), system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
@@ -52,9 +58,9 @@ h1,h2,h3,h4,h5,h6,p,a,li,span,button,input,textarea,select,label { font-family: 
 @keyframes taglineIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 0.95; transform: translateY(0); } }
 .ctas { display:flex; gap:12px; margin-top:8px }
 .btn { padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
-.btn.primary { background: var(--accent); color:#0b0b0b; border:none; transition: transform 180ms ease, box-shadow 180ms ease; box-shadow: 0 6px 18px rgba(249,127,59,0.12); }
+.btn.primary { background: var(--accent); color:#ffffff; border:none; transition: transform 180ms ease, box-shadow 180ms ease; box-shadow: 0 6px 18px rgba(249,127,59,0.12); }
 .btn.primary:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(249,127,59,0.18); }
-.btn.ghost { background: #0b0b0b; color: var(--accent); border: 1px solid rgba(249,127,59,0.08); transition: transform 180ms ease, box-shadow 180ms ease; }
+.btn.ghost { background: #0b0b0b; color: var(--accent); border: 1px solid rgba(249,127,59,0.08); transition: transform 180ms ease, box-shadow 180ms ease; color: #ffffff; }
 .btn.ghost:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
 
 /* floating orange blobs for depth */
