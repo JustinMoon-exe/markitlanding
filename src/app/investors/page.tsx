@@ -13,28 +13,26 @@ export default function InvestorPage() {
       <main
         style={{
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'flex-start',
           color: 'white',
-          gap: '6rem',
           marginTop: '8rem',
-          padding: '1rem',
+          padding: '2rem 4rem',
+          gap: '4rem',
           flexWrap: 'wrap',
           overflowX: 'hidden',
         }}
       >
-        {/* Left side: text and links */}
+        {/* Left Side: Text + Links */}
         <div
           style={{
-            flex: '1 1 400px',
-            maxWidth: '600px',
-            marginTop: '-1.5rem',
-            padding: '0 1rem',
-            boxSizing: 'border-box',
+            flex: '1 1 45%',
+            maxWidth: '700px',
+            minWidth: '320px',
           }}
         >
-          <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Join Our Journey</h1>
-          <p style={{ fontSize: '1rem', lineHeight: '1.6' }}>
+          <h1 style={{ fontSize: '2.3rem', marginBottom: '1.5rem' }}>Join Our Journey</h1>
+          <p style={{ fontSize: '1.05rem', lineHeight: '1.7' }}>
             Welcome, investors! Here you&apos;ll find key information about our vision, progress, and how you can get
             involved. Ready to connect? Book a meeting using the calendar. Per Y-Combinator&apos;s request, we ask that
             you book time after November 17th.
@@ -48,9 +46,9 @@ export default function InvestorPage() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.6rem',
-              marginTop: '1rem',
-              padding: '0.5rem 1.2rem',
-              borderRadius: '5px',
+              marginTop: '1.2rem',
+              padding: '0.6rem 1.4rem',
+              borderRadius: '6px',
               border: 'none',
               backgroundColor: 'var(--accent)',
               color: 'white',
@@ -63,8 +61,8 @@ export default function InvestorPage() {
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
               alt="Notion"
-              width={16}
-              height={16}
+              width={18}
+              height={18}
               style={{ verticalAlign: 'middle' }}
             />
             Investor Memo
@@ -72,7 +70,7 @@ export default function InvestorPage() {
 
           <div
             style={{
-              marginTop: '1.5rem',
+              marginTop: '2rem',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-start',
@@ -102,8 +100,8 @@ export default function InvestorPage() {
                 <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Y_Combinator_logo.svg"
                   alt="Y Combinator"
-                  width={22}
-                  height={22}
+                  width={24}
+                  height={24}
                   style={{ borderRadius: '6px' }}
                 />
                 <span style={{ color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>Y Combinator</span>
@@ -117,30 +115,33 @@ export default function InvestorPage() {
                   display: 'flex',
                   alignItems: 'center',
                   textDecoration: 'none',
-                  gap: '0.3rem',
-                  justifyContent: 'flex-start',
+                  gap: '0.4rem',
                 }}
               >
                 <Image
                   src="/fusen_logo.png"
                   alt="Fusen"
-                  width={26}
-                  height={26}
+                  width={28}
+                  height={28}
                   style={{ borderRadius: '4px', padding: '2px', marginRight: '0.1rem' }}
                 />
-                <span style={{ color: 'white', fontWeight: 600, fontSize: '1.1rem', marginLeft: 0 }}>Fusen</span>
+                <span style={{ color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>Fusen</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Right side: Calendly iframe */}
+        {/* Right Side: Calendly */}
         <div
           style={{
-            flex: '0 1 400px',
-            maxWidth: '400px',
-            height: '26.5rem',
-            borderRadius: '10px',
+            flex: '0 1 45%',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '100%',
+            maxWidth: '600px',
+            minWidth: '350px',
+            height: '34rem',
+            borderRadius: '12px',
             overflow: 'hidden',
           }}
         >
@@ -149,7 +150,11 @@ export default function InvestorPage() {
             title="Calendar Scheduling"
             width="100%"
             height="100%"
-            style={{ border: 'none' }}
+            style={{
+              border: 'none',
+              transform: 'scale(1.05)', // slightly enlarge it
+              transformOrigin: 'center',
+            }}
           ></iframe>
         </div>
       </main>
