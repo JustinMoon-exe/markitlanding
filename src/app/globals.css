@@ -1,71 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --bg-1: #050505;
+  --bg-2: #0b0b0b;
+  --accent: #f97f3bff;
+  --muted: rgba(255,255,255,0.7);
+  --radius: 12px;
+  --font-krona: var(--font-krona-one);
+  --font-amiko: var(--font-amiko);
+}
 
-/* :root {
-  CSS variables for transparent colors if using inline styles with them,
-  but for this version, we're defining colors directly in Tailwind config.
-  --color-markit-orange-transparent-10: rgba(255, 116, 0, 0.07);
-  ...
-} */
+* { box-sizing: border-box; }
+html, body, #__next { height: 100%; }
 
 body {
-  @apply bg-dark-bg text-off-white font-amiko min-h-screen overflow-x-hidden;
-  background-image:
-    theme('backgroundImage.noise'),
-    radial-gradient(ellipse at top right, theme('colors.markit-maroon / 10%'), transparent 70%),
-    radial-gradient(ellipse at bottom left, theme('colors.markit-orange / 8%'), transparent 70%);
-  background-attachment: fixed;
+  margin: 0;
+  /* Force Krona One across the site, falling back to Amiko and system fonts */
+  font-family: var(--font-krona);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* deep black base; subtle orange accents live only in UI elements */
+  background: #000000;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.glass-card {
-  @apply bg-glass-bg backdrop-blur-[8px] border border-glass-border rounded-lg shadow-xl;
-  transition: all 0.3s ease-in-out;
-}
+/* Ensure form controls use the same font */
+button, input, textarea, select { font-family: inherit; }
 
-.glass-card:hover {
-  box-shadow: 0 0 10px rgba(255, 116, 0, 0.4);
-  border-color: rgba(255, 116, 0, 0.4);
-}
+.minimal-root { width: 100%; max-width: 1100px; padding: 24px; display:flex; flex-direction:column; min-height:100vh; }
+.centered-root { justify-content: center; }
 
-.glass-card.purple-glow:hover {
-  box-shadow: 0 0 10px rgba(90, 61, 115, 0.4);
-  border-color: rgba(90, 61, 115, 0.4);
-}
+.header { display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:40px; }
+.brand { font-family: var(--font-krona), var(--font-amiko), sans-serif; font-weight:700; font-size:22px; color: var(--accent); }
 
-.glass-card.maroon-glow:hover {
-  box-shadow: 0 0 10px rgba(159, 122, 234, 0.4);
-  border-color: rgba(159, 122, 234, 0.4);
-}
+.brand-logo { width: 160px; height: auto; margin-bottom: -20px; }
+.nav { display:flex; gap:12px; }
+.nav-btn { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600; }
+.nav-btn:hover { color: #fff; border-color: rgba(255,255,255,0.12); }
 
-@keyframes moveHorizontal {
-  0% { transform: translateX(-100%); filter: opacity(0%); }
-  10% { filter: opacity(100%); }
-  90% { filter: opacity(100%); }
-  100% { transform: translateX(100%); filter: opacity(0%); }
-}
+.hero { width:100%; padding:40px 12px; display:flex; flex-direction:column; gap:14px; }
+.centered-hero { align-items: center; justify-content: center; text-align: center; min-height: calc(100vh - 120px); }
+.hero-title { margin:0; font-size:84px; line-height:0.95; letter-spacing:-1px; color: #ffffff; font-family: var(--font-krona), serif; transform-origin:center; animation: heroIn 900ms cubic-bezier(.2,.9,.2,1) both; }
+.hero-sub { margin:0; color:var(--muted); font-size:18px }
+.tagline { margin: 8px 0 0 0; font-size:16px; color: #cfcfcf; letter-spacing: 0.6px; text-transform: none; opacity: 0.95; font-weight:500; animation: taglineIn 700ms ease both 220ms; }
 
-@keyframes moveVertical {
-  0% { transform: translateY(-100%); filter: opacity(0%); }
-  10% { filter: opacity(100%); }
-  90% { filter: opacity(100%); }
-  100% { transform: translateY(100%); filter: opacity(0%); }
-}
+/* Force Krona One on all common text elements to match the hero */
+h1,h2,h3,h4,h5,h6,p,a,li,span,button,input,textarea,select,label { font-family: var(--font-krona), var(--font-amiko), system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
 
-@keyframes ping {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.5); opacity: 0.8; }
-  100% { transform: scale(2); opacity: 0; }
-}
+@keyframes taglineIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 0.95; transform: translateY(0); } }
+.ctas { display:flex; gap:12px; margin-top:8px }
+.btn { padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+.btn.primary { background: var(--accent); color:#0b0b0b; border:none; transition: transform 180ms ease, box-shadow 180ms ease; box-shadow: 0 6px 18px rgba(249,127,59,0.12); }
+.btn.primary:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(249,127,59,0.18); }
+.btn.ghost { background: #0b0b0b; color: var(--accent); border: 1px solid rgba(249,127,59,0.08); transition: transform 180ms ease, box-shadow 180ms ease; }
+.btn.ghost:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
 
-.animate-moveHorizontal {
-  animation: moveHorizontal 10s ease-in-out infinite;
-}
+/* floating orange blobs for depth */
 
-.animate-moveVertical {
-  animation: moveVertical 10s ease-in-out infinite;
-}
 
-.animate-ping {
-  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+@keyframes heroIn { 0% { opacity: 0; transform: translateY(12px) scale(0.985); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes sheen { 0% { opacity: 0; transform: translateX(-80%) scaleX(0.25); } 50% { opacity: 0.6; transform: translateX(20%) scaleX(0.8); } 100% { opacity: 0; transform: translateX(120%) scaleX(0.25); } }
+.btn.secondary { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); padding:8px 12px }
+
+.panel { margin-top:20px; padding:28px; border-radius:var(--radius); background: rgba(255,255,255,0.02); box-shadow: 0 10px 40px rgba(0,0,0,0.6); width: min(540px, 92%); margin-left: auto; margin-right: auto; }
+.muted { color: var(--muted); }
+.panel-actions { margin-top:12px; display:flex; gap:10px; }
+.investor-links { list-style:none; padding-left:0; display:flex; flex-direction:column; gap:12px; margin:12px 0; }
+.investor-links a { padding:12px 16px; border-radius:10px; background: rgba(255,255,255,0.03); color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,0.04); display:block; width:100%; box-sizing:border-box; text-align:center; font-weight:700; }
+.investor-links a:hover { transform: translateY(-2px); transition: all .14s ease; }
+
+.footer { margin-top:auto; padding:20px 0; color:var(--muted); text-align:center; }
+.muted-dark { color: #6b6b6b; }
+
+@media (max-width:720px) {
+  .hero-title { font-size:44px }
+  .minimal-root { padding:12px }
 }
