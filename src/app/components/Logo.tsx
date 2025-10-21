@@ -8,8 +8,8 @@ const Logo = () => {
       <Image
         src="/logo.png"
         alt="MarkIt Logo"
-        width={120} // Adjust to your logo's design
-        height={40} // Adjust to your logo's design
+        width={120}
+        height={80}
         className="transition-opacity duration-300 group-hover:opacity-80" // Example hover effect
         priority
       />

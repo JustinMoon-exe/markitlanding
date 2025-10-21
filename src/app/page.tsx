@@ -2,11 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import './globals.css';
-
-// Use the Formspree URL found in CTAForm.tsx
-const FORM_URL = 'https://formspree.io/f/mwpbolyl';
-const CALENDLY_URL = 'https://calendly.com/chan-markittrade/30min';
-const NOTION_URL = 'https://www.notion.so/your-investor-page';
+import WaitlistForm from './components/WaitlistForm';
+import Link from 'next/dist/client/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [showWaitlist, setShowWaitlist] = useState(false);
@@ -41,47 +39,50 @@ export default function HomePage() {
     };
   }, [showWaitlist, showInvestors]);
 
-  function openWaitlist() {
-    if (FORM_URL) {
-      window.open(FORM_URL, '_blank', 'noopener,noreferrer');
-      return;
-    }
-    setShowWaitlist(true);
-  }
-
   return (
-    <div className="minimal-root centered-root">
-      <main className="hero centered-hero">
-        <img src="/logo.png" alt="MarkIt logo" className="brand-logo" />
-        <h1 className="hero-title">MarkIt</h1>
+    <div className="minimal-root centered-root" style={{ position: 'relative', minHeight: '100vh' }}>
+      <main
+        className={`hero centered-hero${showWaitlist ? ' slide-up' : ''}`}
+        style={{
+          transition: 'transform 0.6s cubic-bezier(.77,0,.18,1)',
+          transform: showWaitlist ? 'translateY(-350px)' : 'translateY(0)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '6rem'}}>
+          <Image src="/logo.png" alt="MarkIt logo" width={120} height={80} className="brand-logo" />
+          <h1 className="hero-title" style={{ margin: 0 }}>MarkIt</h1>
+        </div>
         <p className="tagline">silver bullet for trade compliance</p>
         <div className="ctas">
-          <button className="btn primary" onClick={openWaitlist}>Join Waitlist</button>
-          <button className="btn ghost" onClick={() => setShowInvestors(true)}>Investors</button>
+          <Link href="/about">
+            <button className="btn ghost">Founders</button>
+          </Link>
+          <button className="btn primary" onClick={() => setShowWaitlist(true)}>Join Waitlist</button>
+          <Link href="/investors">
+            <button className="btn ghost">Investors</button>
+          </Link>
         </div>
-
-        {showWaitlist && (
-          <section className="panel" ref={(el) => { waitRef.current = el || null; }}>
-            <h2>Waitlist</h2>
-            <p className="muted">You'll be taken to our external form.</p>
-            <div className="panel-actions">
-              <a className="btn primary" href={FORM_URL} target="_blank" rel="noopener noreferrer">Open Form</a>
-            </div>
-          </section>
-        )}
-
-        {showInvestors && (
-          <section className="panel" ref={(el) => { investRef.current = el || null; }}>
-            <h2>Investors</h2>
-            <ul className="investor-links">
-              <li><a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Schedule on Calendly</a></li>
-              <li><a href={NOTION_URL} target="_blank" rel="noopener noreferrer">Investor Notion Page</a></li>
-            </ul>
-          </section>
-        )}
       </main>
 
-      <footer className="footer muted-dark">© MarkIt</footer>
+      {showWaitlist && (
+        <div
+          className="waitlist-form-container fade-in"
+          style={{
+            position: 'absolute',
+            top: 'calc(50% - 120px)',
+            left: 0,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            zIndex: 10,
+            animation: 'fadeIn 1.5s ease',
+          }}
+        >
+          <WaitlistForm onClose={() => setShowWaitlist(false)} />
+        </div>
+      )}
+
+      <footer className="footer muted-dark" style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>© MarkIt</footer>
     </div>
   );
 }
