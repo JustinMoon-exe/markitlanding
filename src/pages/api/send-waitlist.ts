@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { firstName, lastName, email, companyPhone, questions } = req.body;
+  const { firstName, lastName, company, jobTitle, email, companyPhone, questions } = req.body;
 
   // Configure transporter (use environment variables for real deployment)
   const transporter = nodemailer.createTransport({
@@ -26,8 +26,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       <ul>
         <li><strong>First Name:</strong> ${firstName}</li>
         <li><strong>Last Name:</strong> ${lastName}</li>
+        <li><strong>Company:</strong> ${company}</li>
+        <li><strong>Job Title:</strong> ${jobTitle || '(not provided)'}</li>
         <li><strong>Email:</strong> ${email}</li>
-        <li><strong>Company Phone:</strong> ${companyPhone || '(not provided)'}</li>
+        <li><strong>Phone Number:</strong> ${companyPhone || '(not provided)'}</li>
         <li><strong>Questions:</strong> ${questions || '(none)'}</li>
       </ul>
     `,

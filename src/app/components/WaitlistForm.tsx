@@ -17,6 +17,8 @@ export default function WaitlistForm({ onClose }: WaitlistFormProps) {
     firstName: '',
     lastName: '',
     email: '',
+    company: '',
+    jobTitle: '',
     companyPhone: '',
     questions: '',
   });
@@ -32,7 +34,7 @@ export default function WaitlistForm({ onClose }: WaitlistFormProps) {
     e.preventDefault();
     setError('');
     // Validate required fields
-    if (!form.firstName.trim() || !form.lastName.trim() || !form.email.trim()) {
+    if (!form.firstName.trim() || !form.lastName.trim() || !form.email.trim() || !form.company.trim()) {
       setError('Please fill in all required fields.');
       return;
     }
@@ -75,12 +77,16 @@ export default function WaitlistForm({ onClose }: WaitlistFormProps) {
   return (
     <form className="waitlist-form" onSubmit={handleSubmit}>
       <div className="form-row" style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-  <input name="firstName" type="text" placeholder="First Name" value={form.firstName} onChange={handleChange} required style={{ flex: 2, height: '2.7rem', padding: '0.7rem 1.2rem', width: '400px '}} />
-  <input name="lastName" type="text" placeholder="Last Name" value={form.lastName} onChange={handleChange} required style={{ flex: 2, height: '2.7rem', padding: '0.7rem 1.2rem', width: '400px' }} />
+        <input name="firstName" type="text" placeholder="First Name" value={form.firstName} onChange={handleChange} required style={{ flex: 2, height: '2.7rem', padding: '0.7rem 1.2rem', width: '400px '}} />
+        <input name="lastName" type="text" placeholder="Last Name" value={form.lastName} onChange={handleChange} required style={{ flex: 2, height: '2.7rem', padding: '0.7rem 1.2rem', width: '400px' }} />
       </div>
       <div className="form-row" style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-  <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} required style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', minWidth: '0', width: '150%' }} />
-  <input name="companyPhone" type="tel" placeholder="Company Phone (optional)" value={form.companyPhone} onChange={handleChange} style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', minWidth: '0', width: '200%' }} />
+        <input name="email" type="email" placeholder="Email Address" value={form.email} onChange={handleChange} required style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', minWidth: '0', width: '150%' }} />
+        <input name="companyPhone" type="tel" placeholder="Phone (optional)" value={form.companyPhone} onChange={handleChange} style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', minWidth: '0', width: '200%' }} />
+      </div>
+      <div className="form-row" style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+        <input name="company" type="text" placeholder="Company" value={form.company} onChange={handleChange} required style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', width: '50%' }} />
+        <input name="jobTitle" type="text" placeholder="Job Title (optional)" value={form.jobTitle} onChange={handleChange} style={{ flex: 1, height: '2.7rem', padding: '0.7rem 1.2rem', width: '50%' }} />
       </div>
       <div className="form-row" style={{ marginBottom: '1.2rem' }}>
         <textarea name="questions" placeholder="Questions? (optional)" value={form.questions} onChange={handleChange} style={{ width: '100%', height: '10rem', resize: 'vertical', fontSize: '1rem', padding: '0.7rem' }} />
