@@ -56,7 +56,8 @@ export async function POST(req: NextRequest) {
     putCode(code, uid);
 
     return withCORS(NextResponse.json({ code }));
-  } catch (e: any) {
-    return withCORS(NextResponse.json({ error: e?.message ?? "error" }, { status: 400 }));
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "error";
+    return withCORS(NextResponse.json({ error: message }, { status: 400 }));
   }
 }

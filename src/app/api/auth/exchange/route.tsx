@@ -34,7 +34,8 @@ export async function POST(req: NextRequest) {
     const customToken = await auth.createCustomToken(uid, { source: "desktop" });
 
     return NextResponse.json({ uid, customToken });
-  } catch (e: any) {
-    return NextResponse.json({ error: e?.message ?? "error" }, { status: 500 });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

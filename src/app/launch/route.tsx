@@ -8,10 +8,12 @@ export async function GET(req: NextRequest) {
   const url = new URL(req.url);
 
   const fragment = url.hash || ""; // like "#code=...&verify=..."
-  if (isMacOS(ua)) {
-    // macOS: Universal Link path your app claims via AASA
-    return NextResponse.redirect(`https://markittrade.com/ulink/auth${fragment}`, 302);
-  }
+  // set up Mac compatibility
+
+  // if (isMacOS(ua)) {
+  //   // macOS: Universal Link path your app claims via AASA
+  //   return NextResponse.redirect(`https://markittrade.com/ulink/auth${fragment}`, 302);
+  // }
   // Windows/Linux: custom scheme
   return NextResponse.redirect(`markit://auth${fragment}`, 302);
 }
