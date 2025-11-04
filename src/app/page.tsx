@@ -49,7 +49,7 @@ export default function HomePage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '6rem'}}>
-          <Image src="/logo.png" alt="MarkIt logo" width={120} height={80} className="brand-logo" />
+          <Image src="/logo.png" alt="MarkIt logo" width={300} height={80} className="brand-logo" />
           <h1 className="hero-title" style={{ margin: 0 }}>MarkIt</h1>
         </div>
         <p className="tagline">silver bullet for trade compliance</p>
