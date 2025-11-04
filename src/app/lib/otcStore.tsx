@@ -1,19 +1,20 @@
-// src/lib/otcStore.ts
-// in memory storage for single use codes (maybe swap to Redis later)
+// use firebase for one-time codes
+import { adminDb } from "@/lib/firebase_init";
 
-type CodeEntry = { uid: string; exp: number; used: boolean };
-const CODES = new Map<string, CodeEntry>();
-
-export function putCode(code: string, uid: string, ttlMs = 5 * 60 * 1000): void {
-  CODES.set(code, { uid, exp: Date.now() + ttlMs, used: false });
+export async function putCode(code: string, uid: string, ttlMs = 2 * 60 * 1000): Promise<void> {
+  const exp = Date.now() + ttlMs;
+  await adminDb().doc(`otc_codes/${code}`).set({ uid, exp, used: false });
 }
 
-export function takeCode(code: string): string | null {
-  const row = CODES.get(code);
-  if (!row) return null;
-  CODES.delete(code); // single-use
-  if (row.used) return null;
-  if (Date.now() > row.exp) return null;
-  row.used = true;
-  return row.uid;
+export async function takeCode(code: string): Promise<string | null> {
+  const ref = adminDb().doc(`otc_codes/${code}`);
+  return adminDb().runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    if (!snap.exists) return null;
+    const data = snap.data() as { uid: string; exp: number; used?: boolean };
+    if (!data || data.used) return null;
+    if (Date.now() > data.exp) return null;
+    tx.delete(ref); // claim single-use
+    return data.uid;
+  });
 }
