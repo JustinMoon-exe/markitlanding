@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Krona_One, Amiko } from 'next/font/google';
+import { Analytics }  from '@vercel/analytics/next';
 import './globals.css';
 
 const kronaOne = Krona_One({
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${kronaOne.variable} ${amiko.variable} antialiased`}>
       <body>
         {children}
+        <Analytics />
       </body>
     </html>
   );
