@@ -5,12 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { SignJWT } from "jose";
 import { randomUUID, timingSafeEqual } from "crypto";
 
-function getVerifySecret() {
-  const s = process.env.AUTH_VERIFY_SECRET;
-  if (!s) throw new Error("AUTH_VERIFY_SECRET missing");
-  return new TextEncoder().encode(s);
-}
-
 function isAuthorized(req: NextRequest): boolean {
   const sent = req.headers.get("x-app-start-secret") || "";
   const expected = process.env.APP_START_SECRET || "";
@@ -32,7 +26,7 @@ export async function POST(req: NextRequest) {
     .setIssuer("markit:desktop")
     .setAudience("markit:sso-hosted")
     .setExpirationTime("2m")
-    .sign(getVerifySecret());
+    .sign(new TextEncoder().encode(process.env.AUTH_VERIFY_SECRET));
 
   return NextResponse.json({ verify });
 }

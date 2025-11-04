@@ -20,12 +20,6 @@ function withCORS(res: NextResponse) {
 }
 export async function OPTIONS() { return withCORS(new NextResponse(null, { status: 204 })); }
 
-function getSecret() {
-  const s = process.env.AUTH_VERIFY_SECRET;
-  if (!s) throw new Error("AUTH_VERIFY_SECRET missing");
-  return new TextEncoder().encode(s);
-}
-
 function getAdminApp(): App {
   const b64 = process.env.FIREBASE_SERVICE_ACCOUNT_B64!;
   const json = JSON.parse(Buffer.from(b64, "base64").toString("utf8"));
@@ -41,7 +35,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify signed JWT
-    await jwtVerify(verify, getSecret(), {
+    await jwtVerify(verify, new TextEncoder().encode(process.env.AUTH_VERIFY_SECRET), {
       issuer: "markit:desktop",
       audience: "markit:sso-hosted",
       algorithms: ["HS256"],
