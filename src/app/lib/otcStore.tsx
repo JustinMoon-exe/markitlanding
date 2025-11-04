@@ -4,7 +4,7 @@
 type CodeEntry = { uid: string; exp: number; used: boolean };
 const CODES = new Map<string, CodeEntry>();
 
-export function putCode(code: string, uid: string, ttlMs = 2 * 60 * 1000): void {
+export function putCode(code: string, uid: string, ttlMs = 5 * 60 * 1000): void {
   CODES.set(code, { uid, exp: Date.now() + ttlMs, used: false });
 }
 
