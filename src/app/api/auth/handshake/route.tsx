@@ -3,8 +3,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
-import { initializeApp, getApps, cert, App } from "firebase-admin/app";
-import { getAuth } from "firebase-admin/auth";
+import { adminAuth } from "@/lib/firebase_init";
 import { randomBytes } from "crypto";
 import { jwtVerify } from "jose";
 import { putCode } from "@/lib/otcStore";
@@ -20,13 +19,6 @@ function withCORS(res: NextResponse) {
 }
 export async function OPTIONS() { return withCORS(new NextResponse(null, { status: 204 })); }
 
-function getAdminApp(): App {
-  const b64 = process.env.FIREBASE_SERVICE_ACCOUNT_B64!;
-  const json = JSON.parse(Buffer.from(b64, "base64").toString("utf8"));
-  if (!getApps().length) return initializeApp({ credential: cert(json) });
-  return getApps()[0]!;
-}
-
 export async function POST(req: NextRequest) {
   try {
     const { idToken, verify } = await req.json();
@@ -41,7 +33,7 @@ export async function POST(req: NextRequest) {
       algorithms: ["HS256"],
     });
     // Verify Firebase ID token from SSO
-    const auth = getAuth(getAdminApp());
+    const auth = adminAuth();
     const decoded = await auth.verifyIdToken(idToken, true);
     const uid = decoded.uid;
 
