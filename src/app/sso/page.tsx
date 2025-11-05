@@ -99,12 +99,6 @@ export default function SSOPage() {
       const already = !!sessionStorage.getItem("did-saml-redirect");
       if (!already) {
         sessionStorage.setItem("did-saml-redirect", "1");
-        window.addEventListener("beforeunload", () => {
-          const pendingRedirectKey = Object.keys(window.sessionStorage).find(key => /^firebase:pendingRedirect:/.test(key));
-          if (!pendingRedirectKey) {
-            console.log("firebase:pendingRedirect: key missing from sessionStorage, getRedirectResult() will return null");
-          }
-        });
         await signInWithRedirect(auth, provider);
         return;
       }
