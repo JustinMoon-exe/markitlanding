@@ -6,7 +6,7 @@ import {
   getAuth,
   SAMLAuthProvider,
   getRedirectResult,
-  signInWithPopup,
+  signInWithRedirect,
   onAuthStateChanged,
   setPersistence,
   browserLocalPersistence,
@@ -21,6 +21,7 @@ export default function SSOPage() {
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN_CUSTOM!,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
+
 };
   useEffect(() => {
     const run = async () => {
@@ -99,7 +100,7 @@ export default function SSOPage() {
       const already = !!sessionStorage.getItem("did-saml-redirect");
       if (!already) {
         sessionStorage.setItem("did-saml-redirect", "1");
-        await signInWithPopup(auth, provider);
+        await signInWithRedirect(auth, provider);
         return;
       }
 
